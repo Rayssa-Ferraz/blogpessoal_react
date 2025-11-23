@@ -1,27 +1,24 @@
+import ListaPostagens from "../../components/postagem/listapostagem/ListaPostagens"
+import ModalPostagem from "../../components/postagem/modalpostagem/ModalPostagem"
 
 function Home() {
 
 
     return (
-        /*Container*/
-        <div
-            className="bg-pink-900 flex justify-center"
-        >
+        <>
+        
+        <div className="bg-pink-900 flex justify-center">
             {/* Grid que divide a tela em duas colunas */}
-            <div
-                className="container grid grid-cols-2 text-white"
-            >
+            <div className="container grid grid-cols-2 text-white">
                 {/* Coluna esquerda */}
-                <div
-                    className="flex flex-col gap-4 items-center justify-center py-4"
-            >  
+                <div className="flex flex-col gap-4 items-center justify-center py-4">  
                 <h2
                     style={{
                         fontSize: "3rem",
                         fontWeight: "bold"
                     }}
                     className="text-5x1 font-bold"
-                >Seja Bem Vinde</h2>
+                >Seja Bem Vinda(o)</h2>
                 <p
                     className="text-xl"
                 >Expresse seus pensamentos e opiniões</p> 
@@ -32,18 +29,16 @@ function Home() {
                         justifyContent: "space-around",
                         gap: "1rem",
                     }}
-                    className="flex justify-around gap-4"
-                >
-                    <div    
-                        className="rounded text-white border-white border-solid border-2 py-2 px-4"
-                    >Nova Postagem</div>
+                    className="flex justify-around gap-4">
+                         <ModalPostagem />
+                    
                 </div>
             </div>
 
             {/* Coluna direita */}
-            <div
-                className="flex justify-center"
-            >
+            <div className="flex justify-center">
+                
+           
                 <img
                     src="https://ik.imagekit.io/f9incgeso/imgblog.png?updatedAt=1763042775163"
                     alt="Imagem da Página Home"
@@ -51,7 +46,10 @@ function Home() {
                 />
             </div>
         </div>
-    </div >
+    </div>
+     <ListaPostagens />
+    </>
+ 
   )
 }
 
