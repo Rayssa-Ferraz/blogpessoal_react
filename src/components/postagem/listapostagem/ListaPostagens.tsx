@@ -5,6 +5,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Postagem from "../../../models/Postagem";
 import { buscar } from "../../../services/Service";
 import CardPostagem from "../cardpostagem/CardPostagem";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaPostagens() {
 
@@ -19,7 +20,7 @@ function ListaPostagens() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!')
+            ToastAlerta('Você precisa estar logado!', 'info')
             navigate('/')
         }
     }, [token])
@@ -51,7 +52,7 @@ function ListaPostagens() {
             {isLoading && (
                 <div className="flex justify-center w-full my-8">
                     <SyncLoader
-                        color="#312e81"
+                        color="#C20E65"
                         size={32}
                     />
                 </div>
@@ -67,7 +68,7 @@ function ListaPostagens() {
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 
-                                    lg:grid-cols-3 gap-8">
+                                    lg:grid-cols-3 gap-8 p-4">
                             {
                                 postagens.map((postagem) => (
                                     <CardPostagem key={postagem.id} postagem={postagem}/>

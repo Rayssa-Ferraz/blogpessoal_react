@@ -5,8 +5,9 @@ import type Postagem from "../../../models/Postagem";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
-function FormPostagem() {
+function FormPostagem(){
 
     const navigate = useNavigate();
 
@@ -64,7 +65,7 @@ function FormPostagem() {
 
     useEffect(() => {
         if(token === ''){
-            alert('Você precisa estar logado');
+            ToastAlerta('Você precisa estar logado', 'info');
         }
     }, [token])
 
@@ -108,12 +109,12 @@ function FormPostagem() {
                     },
                 });
 
-                alert("Postagem atualizada com sucesso")
+                ToastAlerta("Postagem atualizada com sucesso", 'sucesso')
             }catch (error: any){
                 if (error.toString().includes('401')){
                     handleLogout()
                 }else{
-                    alert('Erro ao atualizar a Postagem')
+                    ToastAlerta('Erro ao atualizar a Postagem', 'error')
                 }
             }
         }else {
@@ -124,12 +125,12 @@ function FormPostagem() {
                     },
                 })
 
-                alert('Postagem cadastrada com sucesso');
+                ToastAlerta('Postagem cadastrada com sucesso', 'sucesso');
             }catch (error: any){
                 if(error.toString().includes('401')){
                     handleLogout()
                 }else{
-                    alert ('Erro ao cadastrar a Postagem')
+                    ToastAlerta('Erro ao cadastrar a Postagem', 'error')
                 }
             }
         }
@@ -140,46 +141,48 @@ function FormPostagem() {
 
     const carregandoTema = tema.descricao === '';
 
-    return (
-        <div className="container flex flex-col mx-auto items-center">
-            <h1 className="text-4xl text-center my-8">{id !== undefined ? 'Editar Postagem' : 'Cadastrar Postagem'}</h1>
-
-            <form className="flex flex-col w-1/2 gap-4" 
-                onSubmit={gerarNovaPostagem}>
+    return(
+        <div className="container flex flex-col w-full mx-auto items-center">
+            <h1 className="text-4xl text-center my-8">
+                {id !== undefined ? 'Editar Postagem' : 'Cadastrar Postagem'}
+            </h1>
+            <form className="flex flex-col w-1/2 gap-4"
+                  onSubmit={gerarNovaPostagem}>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="titulo">Título da Postagem</label>
-                    <input
-                        type="text"
-                        placeholder="Titulo"
-                        name="titulo"
-                        required
-                        className="border-2 border-pink-950 rounded p-2"
-                        value={postagem.titulo}
-                        onChange={(e: ChangeEvent<HTMLInputElement>)=> atualizarEstado(e)}
-                    />    
+                        <input
+                            type="text"
+                            placeholder="Titulo"
+                            name="titulo"
+                            required
+                            className="border-2 border-slate-700 rounded p-2"
+                            value={postagem.titulo}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                        />                    
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="titulo">Texto da Postagem</label>
+                    <label htmlFor="titulo">Texto Postagem</label>
                     <input
                         type="text"
                         placeholder="Texto"
                         name="texto"
                         required
-                        className="border-2 border-pink-950 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2"
                         value={postagem.texto}
-                        onChange={(e: ChangeEvent<HTMLInputElement>)=> atualizarEstado(e)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
                 <div className="flex flex-col gap-2">
                     <p>Tema da Postagem</p>
-                    <select name="tema" id="tema" className="border p-2 border-pink-950 rounded"
-                        onChange={(e)=>buscarTemaPorId(e.currentTarget.value)}>
-                        <option value="" selected disabled>Selecione um Tema</option>                     
-                        {temas.map((tema)=>(
-                        <>
-                            <option value={tema.id}>{tema.descricao}</option>
-                        </>
+                    <select name="tema" id="tema" className="border p-2 border-slate-800 rounded"
+                            onChange={(e) => buscarTemaPorId(e.currentTarget.value)}>
+                        <option value="" selected disabled>Selecione um Tema</option>
+                        {temas.map((tema) =>(
+                            <>
+                                <option value={tema.id}>{tema.descricao}</option>
+                            </>
                         ))}
+
                     </select>
                 </div>
                 <button

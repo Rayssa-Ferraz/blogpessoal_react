@@ -5,6 +5,7 @@ import type Tema from "../../../models/Tema";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { buscar } from "../../../services/Service";
 import { SyncLoader } from "react-spinners";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaTemas() {
 
@@ -19,7 +20,7 @@ function ListaTemas() {
 
     useEffect(() => {
         if (token === ''){
-            alert('Você precisa estar logado!');
+            ToastAlerta('Você precisa estar logado!', 'info');
             navigate('/')
         }
     }, [token])
@@ -52,7 +53,7 @@ function ListaTemas() {
                 isLoading && (
                     <div className="flex justify-center w-full my-8">
                         <SyncLoader
-                            color="#312e81"
+                            color="#C20E65"
                             size={32}
                         />
                     </div>
