@@ -151,7 +151,7 @@ http://localhost:5173
 <br  />
 
 
-🧭 Rotas principais
+## 🧭 Rotas principais
 | Rota                     | Página           |
 | ------------------------ | ---------------- |
 | `/`                      | Home             |
